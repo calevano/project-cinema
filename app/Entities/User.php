@@ -1,4 +1,4 @@
-<?php namespace App;
+<?php namespace Cinema\Entities;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
@@ -30,5 +30,13 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 * @var array
 	 */
 	protected $hidden = ['password', 'remember_token'];
+
+	public function setPasswordAttribute($valor)
+	{
+		if(!empty($valor))
+		{
+			$this->attributes['password'] = \Hash::make($valor);
+		}
+	}
 
 }

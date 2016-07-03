@@ -11,11 +11,16 @@
 |
 */
 
-Route::get('/', 'WelcomeController@index');
-
-Route::get('home', 'HomeController@index');
-
-Route::controllers([
-	'auth' => 'Auth\AuthController',
-	'password' => 'Auth\PasswordController',
-]);
+Route::get('/','Front\FrontController@index');
+Route::get('contacto','Front\FrontController@contacto');
+Route::get('reviews','Front\FrontController@reviews');
+Route::get('admin', 'Admin\AdminController@index');
+Route::resource('usuario', 'Front\UsuarioController');
+//Route::get('/', 'WelcomeController@index');
+//
+//Route::get('home', 'HomeController@index');
+//
+//Route::controllers([
+//	'auth' => 'Auth\AuthController',
+//	'password' => 'Auth\PasswordController',
+//]);
