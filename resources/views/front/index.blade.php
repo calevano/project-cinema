@@ -1,6 +1,6 @@
 @extends('layouts.template')
 @section('content')
-
+    @include('front.alerts.errors')
     <div class="header">
         <div class="top-header">
             <div class="logo">
@@ -17,13 +17,24 @@
         </div>
         <div class="header-info">
             <h1>BIG HERO 6</h1>
-            <p class="age"><a href="#">All Age</a> Don Hall, Chris Williams</p>
-            <p class="review">Rating	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;  8,5/10</p>
-            <p class="review reviewgo">Genre	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : &nbsp;&nbsp; Animation, Action, Comedy</p>
-            <p class="review">Release &nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp; 7 November 2014</p>
-            <p class="special">The special bond that develops between plus-sized inflatable robot Baymax, and prodigy Hiro Hamada, who team up with a group of friends to form a band of high-tech heroes.</p>
-            <a class="video" href="#"><i class="video1"></i>WATCH TRAILER</a>
-            <a class="book" href="#"><i class="book1"></i>BOOK TICKET</a>
+            {!!Form::open(['route'=>'log.store', 'method'=>'POST'])!!}
+            <div class="form-group">
+                {!!Form::label('correo','E-Mail')!!}
+                {!!Form::email('email',null,['class'=>'form-control','placeholder'=>'Ingresa tu e-mail'])!!}
+            </div>
+            <div class="form-group">
+                {!!Form::label('password','Contraseña')!!}
+                {!! Form::password('password',['class'=>'form-control','placeholder'=>'Ingresa tu password']) !!}
+            </div>
+            {!! Form::submit('Ingresar',['class'=>'btn btn-primary']) !!}
+            {!!Form::close()!!}
+            {{--<p class="age"><a href="#">All Age</a> Don Hall, Chris Williams</p>--}}
+            {{--<p class="review">Rating	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp;  8,5/10</p>--}}
+            {{--<p class="review reviewgo">Genre	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; : &nbsp;&nbsp; Animation, Action, Comedy</p>--}}
+            {{--<p class="review">Release &nbsp;&nbsp;&nbsp;&nbsp;: &nbsp;&nbsp; 7 November 2014</p>--}}
+            {{--<p class="special">The special bond that develops between plus-sized inflatable robot Baymax, and prodigy Hiro Hamada, who team up with a group of friends to form a band of high-tech heroes.</p>--}}
+            {{--<a class="video" href="#"><i class="video1"></i>WATCH TRAILER</a>--}}
+            {{--<a class="book" href="#"><i class="book1"></i>BOOK TICKET</a>--}}
         </div>
     </div>
     <div class="review-slider">

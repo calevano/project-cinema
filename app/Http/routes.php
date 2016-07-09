@@ -16,6 +16,11 @@ Route::get('contacto','Front\FrontController@contacto');
 Route::get('reviews','Front\FrontController@reviews');
 Route::get('admin', 'Admin\AdminController@index');
 Route::resource('usuario', 'Front\UsuarioController');
+Route::resource('genero', 'Genero\GeneroController');
+
+Route::resource('log', 'Log\LoginController');
+Route::get('logout', 'Log\LoginController@logout');
+
 //Route::get('/', 'WelcomeController@index');
 //
 //Route::get('home', 'HomeController@index');

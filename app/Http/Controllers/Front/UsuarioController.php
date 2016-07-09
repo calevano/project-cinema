@@ -1,12 +1,21 @@
 <?php namespace Cinema\Http\Controllers\Front;
 
 use Cinema\Http\Requests;
+use Cinema\Http\Requests\UserCreateRequest;
+use Cinema\Http\Requests\UserUpdateRequest;
 use Cinema\Http\Controllers\Controller;
-use Cinema\Entities\User;
+use Cinema\User;
 
 use Illuminate\Http\Request;
 
 class UsuarioController extends Controller {
+
+	public function __construct()
+	{
+		$this->middleware('auth');
+//		$this->middleware('admin', ['only'=>['create','edit']]);
+		$this->middleware('admin');
+	}
 
 	/**
 	 * Display a listing of the resource.
@@ -15,7 +24,7 @@ class UsuarioController extends Controller {
 	 */
 	public function index()
 	{
-		$users = User::All();
+		$users = User::paginate(2);
 		return view('admin.usuario.index', compact('users'));
 	}
 
@@ -34,13 +43,14 @@ class UsuarioController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store(Request $request)
+	public function store(UserCreateRequest $request)
 	{
-		User::create([
-			'name' 		=> $request['name'],
-			'email' 	=> $request['email'],
-			'password' 	=> $request['password']
-		]);
+//		User::create([
+//			'name' 		=> $request['name'],
+//			'email' 	=> $request['email'],
+//			'password' 	=> $request['password']
+//		]);
+		User::create($request->all());
 //		'password' 	=> bcrypt($request['password']),
 		return redirect()->to('usuario')->with('message', 'Se agrego correctamente al usuario');
 //		return redirect('usuario')->with('message', 'store');
@@ -75,7 +85,7 @@ class UsuarioController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id, Request $request)
+	public function update($id, UserUpdateRequest $request)
 	{
 		$user = User::find($id);
 		$user->fill($request->all());
@@ -91,7 +101,10 @@ class UsuarioController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+//		User::destroy($id);
+		$user = User::find($id);
+		$user->delete();
+		return redirect()->to('usuario')->with('message', 'Se elimino al usuario');
 	}
 
 }
